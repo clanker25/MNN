@@ -1,0 +1,193 @@
+![MNN](doc/banner.png)
+---
+[![License](https://img.shields.io/github/license/alibaba/MNN)](LICENSE.txt)
+[![Documentation](https://img.shields.io/badge/Documentation-Read-green)](https://mnn-docs.readthedocs.io/en/latest/)
+[![English Version](https://img.shields.io/badge/Language-English-green)](README.md)
+[![簡體中文版本](https://img.shields.io/badge/Language-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)](README_CN.md)
+[![繁體中文版本](https://img.shields.io/badge/Language-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87-green)](README_TW.md)
+[![MNN ホームページ](https://img.shields.io/badge/Homepage-Visit-green)](http://www.mnn.zone)
+[![zread](https://img.shields.io/badge/Zread-ask-green)](https://zread.ai/alibaba/MNN)
+
+## ニュース 🔥
+
+- [2026/11/04] **MNN-Pocket-0.3B** をリリースしました。中国語・英語の指示に対応する **3 億パラメータのモバイルアプリネイティブ言語モデル**です。MNN チームがスマートフォンアプリのタスク要件とリソース予算を踏まえ、モデル構造・学習手法・推論エンジンを協調設計しました。**32K コンテキスト**に対応し、INT4（W4A16）QAT MNN 版のサイズはわずか **173 MB**。iPhone 18 Pro での実測デコード速度は **350 tok/s** です。**Apache 2.0** ライセンスで公開しています。
+
+  [ModelScope](https://modelscope.cn/collections/MNN/MNN-Pocket-03B) | [Hugging Face](https://huggingface.co/collections/taobao-mnn/mnn-pocket-03b) | [Technical report](https://modelscope.cn/models/MNN/MNN-Pocket-0.3B/resolve/master/MNN-Pocket-0.3B-Technical-Report.pdf)
+
+<details>
+<summary> 過去のニュース </summary>
+
+- [2025/01/23] フルマルチモーダル LLM Android アプリをリリースしました: [MNN-LLM-Android](./apps/Android/MnnLlmChat/README.md)。テキストからテキスト、画像からテキスト、音声からテキスト、テキストから画像生成を含みます。
+<p align="center">
+  <img width="20%" alt="Icon"  src="./apps/Android/MnnLlmChat/assets/image_home_new.jpg" style="margin: 0 10px;">
+  <img width="20%" alt="Icon" src="./apps/Android/MnnLlmChat/assets/image_diffusion_new.jpg" style="margin: 0 10px;">
+  <img width="20%" alt="Icon" src="./apps/Android/MnnLlmChat/assets/image_sound_new.jpg" style="margin: 0 10px;">
+  <img width="20%" alt="Icon" src="./apps/Android/MnnLlmChat/assets/image_image_new.jpg" style="margin: 0 10px;">
+</p>
+
+</details>
+
+## 紹介
+MNNは非常に効率的で軽量なディープラーニングフレームワークです。ディープラーニングモデルの推論とトレーニングをサポートし、デバイス上での推論とトレーニングにおいて業界をリードするパフォーマンスを発揮します。現在、MNNはAlibaba Incの30以上のアプリに統合されており、ライブ放送、短編動画キャプチャ、検索推薦、画像による商品検索、インタラクティブマーケティング、エクイティ配布、セキュリティリスク管理など、70以上の使用シナリオをカバーしています。さらに、MNNはIoTなどの組み込みデバイスでも使用されています。
+
+[MNN-LLM](https://github.com/alibaba/MNN/tree/master/transformers/llm)は、MNNエンジンをベースに開発された大規模言語モデルのランタイムソリューションです。このプロジェクトの使命は、LLMモデルをすべてのプラットフォーム（モバイルフォン/PC/IOT）にローカルにデプロイすることです。Qianwen、Baichuan、Zhipu、LLAMAなどの人気のある大規模言語モデルをサポートしています。[MNN-LLMユーザーガイド](https://mnn-docs.readthedocs.io/en/latest/transformers/llm.html)
+
+[MNN-Diffusion](https://github.com/alibaba/MNN/tree/master/transformers/diffusion)は、MNNエンジンをベースに開発されたStable Diffusionモデルのランタイムソリューションです。このプロジェクトの使命は、Stable Diffusionモデルをすべてのプラットフォームにローカルにデプロイすることです。[MNN-Diffusionユーザーガイド](https://mnn-docs.readthedocs.io/en/latest/transformers/diffusion.html)
+
+![アーキテクチャ](doc/architecture.png)
+
+Alibabaの内部では、[MNN](https://mp.weixin.qq.com/s/5I1ISpx8lQqvCS8tGd6EJw)は、[Walle](https://mp.weixin.qq.com/s/qpeCETty0BqqNJV9CMJafA)システムの基本モジュールとして機能しています。Walleは、エンドツーエンド、汎用、大規模なデバイスクラウド協調機械学習のための最初の生産システムであり、トップシステム会議OSDI'22で発表されました。MNNの主要な設計原則と、広範なベンチマークテスト結果（TensorFlow、TensorFlow Lite、PyTorch、PyTorch Mobile、TVMとの比較）は、OSDI論文に記載されています。ベンチマークテストのスクリプトと手順は、「/benchmark」パスに配置されています。MNNまたはWalleの設計が研究や生産に役立つ場合は、以下のようにOSDI論文を引用してください。
+
+    @inproceedings {proc:osdi22:walle,
+        author = {Chengfei Lv and Chaoyue Niu and Renjie Gu and Xiaotang Jiang and Zhaode Wang and Bin Liu and Ziqi Wu and Qiulin Yao and Congyu Huang and Panos Huang and Tao Huang and Hui Shu and Jinde Song and Bin Zou and Peng Lan and Guohuan Xu and Fei Wu and Shaojie Tang and Fan Wu and Guihai Chen},
+        title = {Walle: An {End-to-End}, {General-Purpose}, and {Large-Scale} Production System for {Device-Cloud} Collaborative Machine Learning},
+        booktitle = {16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)},
+        year = {2022},
+        isbn = {978-1-939133-28-1},
+        address = {Carlsbad, CA},
+        pages = {249--265},
+        url = {https://www.usenix.org/conference/osdi22/presentation/lv},
+        publisher = {USENIX Association},
+        month = jul,
+    }
+
+
+## ドキュメントとワークベンチ
+MNNのドキュメントは[Read the docs](https://mnn-docs.readthedocs.io/en/latest)にあります。
+
+docs/READMEを読んで、ドキュメントのHTMLをビルドすることもできます。
+
+MNN Workbenchは[MNNのホームページ](http://www.mnn.zone)からダウンロードできます。事前トレーニング済みのモデル、可視化されたトレーニングツール、デバイスへのワンクリックデプロイメントを提供します。
+
+## 主な特徴
+### 軽量
+- デバイス向けに最適化されており、依存関係がなく、モバイルデバイスやさまざまな組み込みデバイスに簡単にデプロイできます。
+- iOSプラットフォーム：armv7+arm64プラットフォーム用のフルオプションの静的ライブラリサイズは約12MB、リンクされた実行ファイルのサイズ増加は約2Mです。
+- Androidプラットフォーム：コアsoサイズは約800KB（armv7a - c++_shared）。
+- MNN_BUILD_MINIを使用すると、パッケージサイズを約25％削減できます。入力サイズが固定されている場合に限ります。
+- FP16 / Int8量子化をサポートし、モデルサイズを50％〜70％削減できます。
+
+### 汎用性
+- `Tensorflow`、`Caffe`、`ONNX`、`Torchscripts`をサポートし、`CNN`、`RNN`、`GAN`、`Transformer`などの一般的なニューラルネットワークをサポートします。
+- 複数の入力または出力を持つAIモデル、あらゆる種類の次元形式、動的入力、制御フローをサポートします。
+- MNNは、AIモデルで使用されるほぼすべてのOPをサポートしています。コンバータは178の`Tensorflow` OP、52の`Caffe` OP、163の`Torchscripts` OP、158の`ONNX` OPをサポートしています。
+- iOS 8.0+、Android 4.3+、およびPOSIXインターフェースを持つ組み込みデバイスをサポートします。
+- 複数のデバイスでのハイブリッドコンピューティングをサポートします。現在、CPUとGPUをサポートしています。
+
+### 高性能
+- ARM / x64 CPUの性能を最大限に引き出すために、多くの最適化されたアセンブリコードを実装しています。
+- Metal / OpenCL / Vulkanを使用して、モバイルデバイス上でのGPU推論をサポートします。
+- CUDAとtensorcoreを使用して、NVIDIA GPUを使用したより高速な推論をサポートします。
+- 畳み込みおよび転置畳み込みアルゴリズムは効率的で安定しています。Winograd畳み込みアルゴリズムは、3x3、4x4、5x5、6x6、7x7などの対称畳み込みをより良くするために広く使用されています。
+- FP16の半精度計算サポートを備えた新しいアーキテクチャARM v8.2を使用すると、速度が2倍になります。ARM v8.2およびVNNI用のsdotを使用すると、2.5倍の速度向上が得られます。
+
+### 使いやすさ
+- MNNのOPを使用して、numpyのような数値計算を行うことができます。
+- OpenCVのような軽量の画像処理モジュールをサポートし、サイズはわずか100kです。
+- PC /モバイルでモデルを構築してトレーニングすることをサポートします。
+- MNN Python APIを使用すると、MLエンジ��アはC++コードに触れることなく、MNNを使用して推論、トレーニング、画像処理を簡単に行うことができます。
+
+MNNがサポートするアーキテクチャ/精度は以下の通りです：
+
+- S ：サポートされており、深く最適化されており、使用を推奨します。
+- A ：サポートされており、初期の最適化が行われているか、使用可能です。
+- B ：サポートされていますが、バグがあるか、最適化されていないため、使用を推奨しません。
+- C ：サポートされていません。
+
+| アーキテクチャ / 精度 |  | Normal | FP16 | BF16 | INT8 / INT4 |
+| --- | --- | --- | --- | --- | --- |
+| CPU | ネイティブ | B | C | B | B |
+|  | x86/x64-SSE4.1 | A | C | C | A |
+|  | x86/x64-AVX2 | S | C | C | A |
+|  | x86/x64-AVX512 | S | C | C | S |
+|  | ARMv7a | S | C | S | S |
+|  | ARMv8 | S | S (ARMv8.2) | S(ARMv8.6) | S |
+|  | ARMv9 (SME2) | S | S | B | S |
+|  | RISC-V (RVV) | A | C | C | B |
+| GPU | OpenCL | A | S | C | S |
+|  | Vulkan | A | A | C | A |
+|  | Metal | A | S | C | S |
+|  | CUDA | A | S | C | A |
+| NPU | CoreML | A | A | C | C |
+|  | Hexagon | A | A | C | B |
+|  | NeuroPilot | B | B | C | B |
+|  | HIAI | B | C | C | B |
+|  | NNAPI | B | B | C | B |
+|  | QNN | C | B | C | A |
+
+CoreML は `Precision_Normal` で主に FP16 の MIL テンソルと重みを使用します。`Precision_Low` は独立した実行パスではなく、各演算の実行デバイスは Core ML が選択します。
+
+Hexagon ではホスト入力が Normal 精度の場合もデバイステンソルに FP16 を使用します。
+
+
+ARMv9 では ARMv8 のパスを使用できます。SME2 の高速化には対応 CPU とビルド設定が必要です。BF16 は既存の ARM パスを使用し、`MNN_SUPPORT_BF16` の有効化が必要です。RISC-V IME2 の最適化は SpacemiT K3 向けです。
+
+INT8 / INT4 の評価には重みのみを量子化するモデルのパスも含まれ、すべての演算が整数計算されることを意味しません。Hexagon の LLM ドキュメントでは現在、対称 INT4 重みと FP16 活性化を必要とします。QNN の対応範囲は対象デバイスと量子化設定によって異なります。
+
+
+
+## ツール
+
+MNN（テンソル計算エンジン）に基づいて、推論、トレーニング、一般的な計算をサポートする一連のツールを提供しています。
+
+- MNN-Converter：他のモデルをMNNモデルに変換して推論を行うためのツール。Tensorflow���lite）、Caffe、ONNX、Torchscriptsなどをサポートし、グラフの最適化を行って計算を削減します。
+- MNN-Compress：モデルを圧縮してサイズを削減し、パフォーマンス/速度を向上させます。
+- MNN-Express：制御フローを持つモデルをサポートし、MNNのOPを使用して一般的な計算を行います。
+- MNN-CV：OpenCVに似たライブラリですが、MNNに基づいており、はるかに軽量です。
+- MNN-Train：MNNモデルのトレーニングをサポートします。
+
+## MNNコミュニティからのディスカッションとヘルプの取得方法
+
+グループディスカッションは主に中国語で行われますが、英語を話す方も歓迎し、サポートします。
+
+Dingtalkディスカッショングループ：
+
+
+グループ＃4 ：160170007549
+
+グループ＃3 （満員）
+
+グループ＃2（満員）：23350225
+
+グループ＃1（満員）：23329087
+
+## 歴史的な論文
+
+MNNの初期バージョンは、モバイル推論エンジンとして、手動最適化に焦点を当てたもので、MLSys 2020で発表されました。以前にMNNが研究に役立った場合は、以下のように論文を引用してください：
+
+    @inproceedings{alibaba2020mnn,
+      author = {Jiang, Xiaotang and Wang, Huan and Chen, Yiliu and Wu, Ziqi and Wang, Lichuan and Zou, Bin and Yang, Yafeng and Cui, Zongyang and Cai, Yu and Yu, Tianhang and Lv, Chengfei and Wu, Zhihua},
+      title = {MNN: A Universal and Efficient Inference Engine},
+      booktitle = {MLSys},
+      year = {2020}
+    }
+
+
+## ライセンス
+Apache 2.0
+
+## 謝辞
+MNNの参加者：淘宝技術部、検索エンジニアリングチーム、DAMOチーム、優酷およびその他のAlibaba Groupの従業員。
+
+MNNは以下のプロジェクトを参照しています：
+- [Caffe](https://github.com/BVLC/caffe)
+- [flatbuffer](https://github.com/google/flatbuffers)
+- [gemmlowp](https://github.com/google/gemmlowp)
+- [Google Vulkan demo](http://www.github.com/googlesamples/android-vulkan-tutorials)
+- [Halide](https://github.com/halide/Halide)
+- [Mace](https://github.com/XiaoMi/mace)
+- [ONNX](https://github.com/onnx/onnx)
+- [protobuffer](https://github.com/protocolbuffers/protobuf)
+- [skia](https://github.com/google/skia)
+- [Tensorflow](https://github.com/tensorflow/tensorflow)
+- [ncnn](https://github.com/Tencent/ncnn)
+- [paddle-mobile](https://github.com/PaddlePaddle/paddle-mobile)
+- [stb](https://github.com/nothings/stb)
+- [rapidjson](https://github.com/Tencent/rapidjson)
+- [pybind11](https://github.com/pybind/pybind11)
+- [pytorch](https://github.com/pytorch/pytorch)
+- [bolt](https://github.com/huawei-noah/bolt)
+- [libyuv](https://chromium.googlesource.com/libyuv/libyuv)
+- [libjpeg](https://github.com/libjpeg-turbo/libjpeg-turbo)
+- [opencv](https://github.com/opencv/opencv)
+- [onnxruntime](https://github.com/microsoft/onnxruntime)
